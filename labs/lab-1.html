@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="uk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,41 +9,23 @@
     <style>
         .registration-form {
             max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box; 
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .submit-btn {
-            background: #34495e;
-            color: white;
+            padding: 25px;
+
+            margin: 40px auto;
+            position: relative;
+
+            background: #ffffff;
+            color: #2c3e50;
+
+            border-radius: 12px;
+
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+
             border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-        }
-        .submit-btn:hover {
-            background: #2c3e50;
         }
     </style>
 </head>
+
 <body>
     <header>
         <h1>Лабораторна робота №1</h1>
@@ -58,8 +41,9 @@
     <main>
         <section>
             <h2>Форма реєстрації</h2>
-            <form action="https://webhook.site/1e6cef8e-e01e-414d-a487-48c022c18098" method="POST" class="registration-form">
-                
+            <form action="https://webhook.site/1e6cef8e-e01e-414d-a487-48c022c18098" method="POST"
+                class="registration-form">
+
                 <div class="form-group">
                     <label for="first_name">Ім'я:</label>
                     <input type="text" id="first_name" name="first_name" required>
@@ -110,4 +94,5 @@
         <p><a href="../index.html">На головну сторінку</a></p>
     </footer>
 </body>
+
 </html>
