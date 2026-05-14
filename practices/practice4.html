@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практична робота №4 - Клавіатура</title>
+    <!-- Вимога 2: Підключення кастомного шрифту Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Базові налаштування */
+       /* Базові налаштування */
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Nunito', sans-serif; 
+        }
+
+        /* Основа клавіатури */
+        .keyboard-base {
+            background-color: #b0b3b8;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), inset 0 2px 5px rgba(255, 255, 255, 0.5);
+            display: flex;
+            gap: 15px;
+        }
+
+        .main-keys {
+            display: grid;
+            grid-template-columns: repeat(60, 1fr); 
+            grid-gap: 5px;
+            width: 750px;
+        }
+
+        .nav-keys {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 5px;
+            width: 150px;
+            align-content: space-between;
+        }
+
+        .numpad {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 5px;
+            width: 200px;
+        }
+
+        /* Загальний стиль для всіх кнопок */
+        .key {
+            background-color: #ffffff;
+            color: #333;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.1s ease;
+            height: 45px;
+            box-shadow: 0 3px 0 #8c8c8c, 0 4px 4px rgba(0,0,0,0.1);
+        }
+
+        /* ВИПРАВЛЕННЯ: Ширина за замовчуванням тільки для головного блоку */
+        .main-keys .key {
+            grid-column: span 4; 
+        }
+
+        /* Зміна розмірів специфічних клавіш */
+        /* Жорстко вказуємо початок нових рядків (колонка 1) */
+        .key.esc { grid-column: 1 / span 4; margin-right: 15px; }
+        .key.tilde { grid-column: 1 / span 4; }
+        .key.tab { grid-column: 1 / span 6; justify-content: flex-start; padding-left: 15px; }
+        .key.caps { grid-column: 1 / span 7; justify-content: flex-start; padding-left: 15px; }
+        .key.shift-l { grid-column: 1 / span 9; justify-content: flex-start; padding-left: 15px; }
+        .key.ctrl-l { grid-column: 1 / span 5; } 
+
+        /* Розміри інших клавіш та модифікаторів */
+        .key.f-key { height: 35px; margin-bottom: 10px; font-size: 12px; }
+        .key.backspace { grid-column: span 8; justify-content: flex-end; padding-right: 15px; }
+        .key.slash { grid-column: span 6; } /* Правильна ширина для \ */
+        .key.enter { grid-column: span 9; justify-content: flex-end; padding-right: 15px; }
+        .key.shift-r { grid-column: span 11; justify-content: flex-end; padding-right: 15px; }
+        .key.ctrl { grid-column: span 5; }
+        .key.space { grid-column: span 25; } /* Зменшили пробіл, щоб влізли всі кнопки нижнього ряду */
+        
+        /* Numpad */
+        .key.numpad-zero { grid-column: span 2; }
+        .key.numpad-enter { grid-row: span 2; height: auto; }
+        .key.numpad-plus { grid-row: span 2; height: auto; }
+        
+        .key.numpad-zero { grid-column: span 2; }
+        .key.numpad-enter { grid-row: span 2; height: auto; }
+        .key.numpad-plus { grid-row: span 2; height: auto; }
+
+        .key:hover {
+            background-color: #f4f4f4;
+            color: #000;
+        }
+
+        .key:active {
+            transform: translateY(3px);
+            box-shadow: 0 0px 0 #8c8c8c, 0 1px 1px rgba(0,0,0,0.1); 
+            background-color: #e8e8e8;
+        }
+
+        .f-group-gap { margin-right: 15px; }
+
+    </style>
+</head>
+<body>
+
+<div class="keyboard-base">
+    <!-- Основний блок клавіш -->
+    <div class="main-keys">
+        <!-- Ряд 0: F-клавіші -->
+        <div class="key f-key esc">Esc</div>
+        <div class="key f-key">F1</div><div class="key f-key">F2</div><div class="key f-key">F3</div><div class="key f-key f-group-gap">F4</div>
+        <div class="key f-key">F5</div><div class="key f-key">F6</div><div class="key f-key">F7</div><div class="key f-key f-group-gap">F8</div>
+        <div class="key f-key">F9</div><div class="key f-key">F10</div><div class="key f-key">F11</div><div class="key f-key">F12</div>
+
+        <!-- Ряд 1: Цифри -->
+        <div class="key tilde">`</div><div class="key">1</div><div class="key">2</div><div class="key">3</div>
+        <div class="key">4</div><div class="key">5</div><div class="key">6</div><div class="key">7</div>
+        <div class="key">8</div><div class="key">9</div><div class="key">0</div><div class="key">-</div>
+        <div class="key">=</div><div class="key backspace">Backspace</div>
+
+        <!-- Ряд 2: QWERTY -->
+        <div class="key tab">Tab</div>
+        <div class="key">Q</div><div class="key">W</div><div class="key">E</div><div class="key">R</div>
+        <div class="key">T</div><div class="key">Y</div><div class="key">U</div><div class="key">I</div>
+        <div class="key">O</div><div class="key">P</div><div class="key">[</div><div class="key">]</div>
+        <div class="key">\</div>
+
+        <!-- Ряд 3: ASDFG -->
+        <div class="key caps">Caps Lock</div>
+        <div class="key">A</div><div class="key">S</div><div class="key">D</div><div class="key">F</div>
+        <div class="key">G</div><div class="key">H</div><div class="key">J</div><div class="key">K</div>
+        <div class="key">L</div><div class="key">;</div><div class="key">'</div>
+        <div class="key enter">Enter</div>
+
+        <!-- Ряд 4: ZXCVB -->
+        <div class="key shift-l">Shift</div>
+        <div class="key">Z</div><div class="key">X</div><div class="key">C</div><div class="key">V</div>
+        <div class="key">B</div><div class="key">N</div><div class="key">M</div><div class="key">,</div>
+        <div class="key">.</div><div class="key">/</div>
+        <div class="key shift-r">Shift</div>
+
+        <!-- Ряд 5: Пробіл -->
+        <div class="key ctrl">Ctrl</div>
+        <div class="key ctrl">Win</div>
+        <div class="key ctrl">Alt</div>
+        <div class="key space">Space</div>
+        <div class="key ctrl">Alt Gr</div>
+        <div class="key ctrl">Win</div>
+        <div class="key ctrl">Menu</div>
+        <div class="key ctrl">Ctrl</div>
+    </div>
+
+    <!-- Навігаційний блок (стрілки та Insert/Home) -->
+    <div class="nav-keys">
+        <!-- Блок Insert/Home/PgUp -->
+        <div class="key">Ins</div><div class="key">Home</div><div class="key">PgU</div>
+        <div class="key">Del</div><div class="key">End</div><div class="key">PgD</div>
+        
+        <!-- Порожній простір -->
+        <div style="grid-column: span 3; height: 45px;"></div>
+        
+        <!-- Стрілки -->
+        <div></div><div class="key">↑</div><div></div>
+        <div class="key">←</div><div class="key">↓</div><div class="key">→</div>
+    </div>
+
+    <!-- Numpad -->
+    <div class="numpad">
+        <div class="key">Num</div><div class="key">/</div><div class="key">*</div><div class="key">-</div>
+        <div class="key">7</div><div class="key">8</div><div class="key">9</div><div class="key numpad-plus">+</div>
+        <div class="key">4</div><div class="key">5</div><div class="key">6</div>
+        <div class="key">1</div><div class="key">2</div><div class="key">3</div><div class="key numpad-enter">Ent</div>
+        <div class="key numpad-zero">0</div><div class="key">.</div>
+    </div>
+</div>
+
+</body>
+</html>
