@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Лабораторна робота №4 - Планер</title>
-    <!-- Вимога 2: Підключені кастомні шрифти (Oswald для заголовку, Roboto для тексту) -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
@@ -23,7 +22,6 @@
             color: #333;
         }
 
-        /* Вимога 5: Сторінка реагує на зміни розміру екрану (гумові розміри) */
         .planner-wrapper {
             width: 100%;
             max-width: 1100px;
@@ -33,13 +31,11 @@
             border-left: 4px solid #c0c0c0;
             border-right: 4px solid #c0c0c0;
             border-top: 4px solid #c0c0c0;
-            background-color: #c0c0c0; /* Колір кордонів між комірками */
+            background-color: #c0c0c0; 
             
-            /* Вимога 1: Розмітка сторінки створена за допомогою grid */
             display: grid;
             grid-template-columns: 1.2fr 1fr 1fr 1fr;
             grid-template-rows: auto 1fr 1fr;
-            /* Використовуємо gap як лінії між блоками */
             gap: 2px;
             
             grid-template-areas:
@@ -48,13 +44,11 @@
                 "todo thu fri wknd";
         }
 
-        /* Усі основні блоки мають білий фон, щоб було видно сірі лінії через gap */
         .header, .sidebar, .day, .sat, .sun {
             background-color: #ffffff;
             padding: 15px;
         }
 
-        /* --- HEADER --- */
         .header {
             grid-area: head;
             display: flex;
@@ -85,7 +79,6 @@
             font-weight: bold;
         }
 
-        /* Вимога 4: Всі поля для вводу можна редагувати */
         .header-inputs input[type="text"] {
             border: none;
             border-bottom: 1px solid #333;
@@ -105,7 +98,6 @@
             margin-bottom: 5px;
         }
 
-        /* Вимога 3: Всі чекбокси клікабельні */
         .check-item {
             display: flex;
             align-items: center;
@@ -114,7 +106,6 @@
             cursor: pointer;
         }
 
-        /* --- СИДБАР (TO DO) --- */
         .sidebar {
             grid-area: todo;
             display: flex;
@@ -152,14 +143,12 @@
             font-family: inherit;
         }
 
-        /* --- ДНІ ТИЖНЯ --- */
         .day {
             display: flex;
             flex-direction: column;
             position: relative;
         }
 
-        /* Прив'язка до сітки */
         .day.mon { grid-area: mon; }
         .day.tue { grid-area: tue; }
         .day.wed { grid-area: wed; }
@@ -171,7 +160,7 @@
             display: flex;
             flex-direction: column;
             gap: 2px;
-            background-color: #c0c0c0; /* лінія між суботою та неділею */
+            background-color: #c0c0c0; 
         }
         .wknd-container .sat, .wknd-container .sun {
             flex: 1;
@@ -181,7 +170,7 @@
 
         .day-header {
             display: flex;
-            justify-content: center; /* Текст по центру */
+            justify-content: center; 
             align-items: center;
             position: relative;
             margin-bottom: 10px;
@@ -191,7 +180,7 @@
 
         .day-header input[type="checkbox"] {
             position: absolute;
-            right: 0; /* Чекбокс притиснутий до правого краю */
+            right: 0; 
             cursor: pointer;
         }
 
@@ -205,7 +194,7 @@
             background: transparent;
         }
 
-        /* Декоративні трикутнички (опціонально, як на макеті) */
+       
         .marker {
             position: absolute;
             top: -2px;
@@ -223,7 +212,7 @@
 <body>
 
 <div class="planner-wrapper">
-    <!-- Шапка -->
+  
     <div class="header">
         <div class="header-title">WEEKLY PLAN</div>
         <div class="header-inputs">
@@ -242,18 +231,17 @@
         </div>
     </div>
 
-    <!-- Ліва колонка (To Do) -->
     <div class="sidebar">
         <div class="sidebar-top-text">TO DO</div>
         
         <div class="section-title">TOP 3 GOALS</div>
-        <!-- Генеруємо 3 рядки -->
+    
         <div class="todo-line"><input type="checkbox"><input type="text"></div>
         <div class="todo-line"><input type="checkbox"><input type="text"></div>
         <div class="todo-line"><input type="checkbox"><input type="text"></div>
 
         <div class="section-title">EVERYTHING ELSE</div>
-        <!-- Генеруємо багато рядків -->
+  
         <div class="todo-line"><input type="checkbox"><input type="text"></div>
         <div class="todo-line"><input type="checkbox"><input type="text"></div>
         <div class="todo-line"><input type="checkbox"><input type="text"></div>
@@ -265,16 +253,16 @@
         <div class="todo-line"><input type="checkbox"><input type="text"></div>
 
         <div class="section-title">NEXT WEEK</div>
-        <!-- Генеруємо 4 рядки -->
+       
         <div class="todo-line"><input type="checkbox"><input type="text"></div>
         <div class="todo-line"><input type="checkbox"><input type="text"></div>
         <div class="todo-line"><input type="checkbox"><input type="text"></div>
         <div class="todo-line"><input type="checkbox"><input type="text"></div>
     </div>
 
-    <!-- Дні тижня -->
+  
     <div class="day mon">
-        <div class="marker"></div> <!-- Декоративний трикутник -->
+        <div class="marker"></div> 
         <div class="day-header"><span>MONDAY</span><input type="checkbox"></div>
         <textarea></textarea>
     </div>
@@ -303,7 +291,7 @@
         <textarea></textarea>
     </div>
 
-    <!-- Вихідні (розділені навпіл в одній колонці) -->
+    
     <div class="wknd-container">
         <div class="sat">
             <div class="day-header"><span>SATURDAY</span><input type="checkbox"></div>

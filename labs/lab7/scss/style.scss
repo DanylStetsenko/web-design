@@ -1,78 +1,93 @@
-$bg-color: #1a472a;
-$card-bg: #ffffff;
-$accent-color: #c0392b;
-$text-color: #2c3e50;
-$font-main: 'Montserrat', sans-serif;
-$font-festive: 'Mountains of Christmas', cursive;
 
-body {
+$bg-color: #0f172a;
+$card-bg: #ffffff;
+$text-main: #334155;
+$text-accent: #e11d48;
+$primary-color: #10b981;
+$primary-hover: #059669;
+$font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.page {
     background-color: $bg-color;
     font-family: $font-main;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    color: $text-main;
 }
 
-.card-container {
-    padding: 20px;
-}
 
 .card {
     background-color: $card-bg;
-    width: 100%;
-    max-width: 400px;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 450px;
     text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 
     &__header {
-        background-color: $accent-color;
-        padding: 40px 20px;
-        position: relative;
+        margin-bottom: 20px;
     }
 
     &__title {
-        font-family: $font-festive;
-        color: #ffffff;
-        font-size: 3rem;
+        color: $text-accent;
+        font-size: 2.5rem;
+        margin-bottom: 10px;
     }
 
-    &__body {
-        padding: 30px 20px;
+    &__content {
+        margin-bottom: 30px;
     }
 
     &__text {
-        color: $text-color;
-        font-size: 1.1rem;
-        line-height: 1.6;
+        font-size: 1.2rem;
+        line-height: 1.5;
+        margin-bottom: 20px;
     }
 
-    &__illustration {
-        font-size: 4rem;
-        margin-top: 20px;
+    &__decoration {
+        font-size: 5rem;
+        animation: bounce 2s infinite;
     }
 
     &__footer {
-        padding: 0 20px 30px;
+        margin-top: 20px;
     }
+}
 
-    &__button {
-        border: none;
-        padding: 12px 25px;
-        border-radius: 25px;
-        font-weight: 700;
-        cursor: pointer;
-        transition: transform 0.2s;
+.btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
 
-        &--primary {
-            background-color: $bg-color;
-            color: white;
-        }
+    &--primary {
+        background-color: $primary-color;
+        color: #fff;
 
         &:hover {
-            transform: scale(1.05);
+            background-color: $primary-hover;
+        }
+        
+        &:active {
+            transform: translateY(2px);
         }
     }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-15px); }
+    60% { transform: translateY(-7px); }
 }

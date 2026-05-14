@@ -1,0 +1,79 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.page {
+  background-color: #0f172a;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #334155;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 450px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+.card__header {
+  margin-bottom: 20px;
+}
+.card__title {
+  color: #e11d48;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+.card__content {
+  margin-bottom: 30px;
+}
+.card__text {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+.card__decoration {
+  font-size: 5rem;
+  animation: bounce 2s infinite;
+}
+.card__footer {
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+.btn--primary {
+  background-color: #10b981;
+  color: #fff;
+}
+.btn--primary:hover {
+  background-color: #059669;
+}
+.btn--primary:active {
+  transform: translateY(2px);
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-15px);
+  }
+  60% {
+    transform: translateY(-7px);
+  }
+}/*# sourceMappingURL=style.css.map */
