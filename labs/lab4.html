@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №4 - Планер</title>
+    <!-- Вимога 2: Підключені кастомні шрифти (Oswald для заголовку, Roboto для тексту) -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+        }
+
+        /* Вимога 5: Сторінка реагує на зміни розміру екрану (гумові розміри) */
+        .planner-wrapper {
+            width: 100%;
+            max-width: 1100px;
+            min-height: 750px;
+            /* Товста нижня сіра лінія планера */
+            border-bottom: 12px solid #8c8c8c;
+            border-left: 4px solid #c0c0c0;
+            border-right: 4px solid #c0c0c0;
+            border-top: 4px solid #c0c0c0;
+            background-color: #c0c0c0; /* Колір кордонів між комірками */
+            
+            /* Вимога 1: Розмітка сторінки створена за допомогою grid */
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr 1fr;
+            grid-template-rows: auto 1fr 1fr;
+            /* Використовуємо gap як лінії між блоками */
+            gap: 2px;
+            
+            grid-template-areas:
+                "head head head head"
+                "todo mon tue wed"
+                "todo thu fri wknd";
+        }
+
+        /* Усі основні блоки мають білий фон, щоб було видно сірі лінії через gap */
+        .header, .sidebar, .day, .sat, .sun {
+            background-color: #ffffff;
+            padding: 15px;
+        }
+
+        /* --- HEADER --- */
+        .header {
+            grid-area: head;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 15px 20px 10px;
+        }
+
+        .header-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: #4a4a4a;
+            line-height: 0.9;
+        }
+
+        .header-inputs {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 5px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* Вимога 4: Всі поля для вводу можна редагувати */
+        .header-inputs input[type="text"] {
+            border: none;
+            border-bottom: 1px solid #333;
+            outline: none;
+            width: 120px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px;
+        }
+
+        .header-checks {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 10px;
+            font-weight: bold;
+            text-align: right;
+            margin-bottom: 5px;
+        }
+
+        /* Вимога 3: Всі чекбокси клікабельні */
+        .check-item {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        /* --- СИДБАР (TO DO) --- */
+        .sidebar {
+            grid-area: todo;
+            display: flex;
+            flex-direction: column;
+            padding-top: 10px;
+        }
+
+        .sidebar-top-text {
+            text-align: right;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 11px;
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        .todo-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            gap: 8px;
+        }
+
+        .todo-line input[type="text"] {
+            flex-grow: 1;
+            border: none;
+            border-bottom: 1px solid #e0e0e0;
+            outline: none;
+            background: transparent;
+            font-family: inherit;
+        }
+
+        /* --- ДНІ ТИЖНЯ --- */
+        .day {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Прив'язка до сітки */
+        .day.mon { grid-area: mon; }
+        .day.tue { grid-area: tue; }
+        .day.wed { grid-area: wed; }
+        .day.thu { grid-area: thu; }
+        .day.fri { grid-area: fri; }
+        
+        .wknd-container {
+            grid-area: wknd;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            background-color: #c0c0c0; /* лінія між суботою та неділею */
+        }
+        .wknd-container .sat, .wknd-container .sun {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: center; /* Текст по центру */
+            align-items: center;
+            position: relative;
+            margin-bottom: 10px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .day-header input[type="checkbox"] {
+            position: absolute;
+            right: 0; /* Чекбокс притиснутий до правого краю */
+            cursor: pointer;
+        }
+
+        .day textarea {
+            flex-grow: 1;
+            border: none;
+            outline: none;
+            resize: none;
+            font-family: 'Roboto', sans-serif;
+            font-size: 13px;
+            background: transparent;
+        }
+
+        /* Декоративні трикутнички (опціонально, як на макеті) */
+        .marker {
+            position: absolute;
+            top: -2px;
+            left: -8px;
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #8c8c8c;
+            z-index: 10;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="planner-wrapper">
+    <!-- Шапка -->
+    <div class="header">
+        <div class="header-title">WEEKLY PLAN</div>
+        <div class="header-inputs">
+            <div class="input-group">
+                <label>WEEK OF</label>
+                <input type="text">
+            </div>
+            <div class="input-group">
+                <label>HEALTHY HABIT</label>
+                <input type="text">
+            </div>
+        </div>
+        <div class="header-checks">
+            <label class="check-item">ROCKED IT <input type="checkbox"></label>
+            <label class="check-item">ROOM FOR IMPROVEMENT <input type="checkbox"></label>
+        </div>
+    </div>
+
+    <!-- Ліва колонка (To Do) -->
+    <div class="sidebar">
+        <div class="sidebar-top-text">TO DO</div>
+        
+        <div class="section-title">TOP 3 GOALS</div>
+        <!-- Генеруємо 3 рядки -->
+        <div class="todo-line"><input type="checkbox"><input type="text"></div>
+        <div class="todo-line"><input type="checkbox"><input type="text"></div>
+        <div class="todo-line"><input type="checkbox"><input type="text"></div>
+
+        <div class="section-title">EVERYTHING ELSE</div>
+        <!-- Генеруємо багато рядків -->
+        <div class="todo-line"><input type="checkbox"><input type="text"></div>
+        <div class="todo-line"><input type="checkbox"><input type="text"></div>
+        <div class="todo-line"><input type="checkbox"><input type="text"></div>
+        <div class="todo-line"><input type="checkbox"><input type="text"></div>
+        <div class="todo-line"><input type="checkbox"><input type="text"></div>
+        <div class="todo-line"><input type="checkbox"><input type="text"></div>
+        <div class="todo-line"><input type="checkbox"><input type="text"></div>
+        <div class="todo-line"><input type="checkbox"><input type="text"></div>
+        <div class="todo-line"><input type="checkbox"><input type="text"></div>
+
+        <div class="section-title">NEXT WEEK</div>
+        <!-- Генеруємо 4 рядки -->
+        <div class="todo-line"><input type="checkbox"><input type="text"></div>
+        <div class="todo-line"><input type="checkbox"><input type="text"></div>
+        <div class="todo-line"><input type="checkbox"><input type="text"></div>
+        <div class="todo-line"><input type="checkbox"><input type="text"></div>
+    </div>
+
+    <!-- Дні тижня -->
+    <div class="day mon">
+        <div class="marker"></div> <!-- Декоративний трикутник -->
+        <div class="day-header"><span>MONDAY</span><input type="checkbox"></div>
+        <textarea></textarea>
+    </div>
+
+    <div class="day tue">
+        <div class="marker"></div>
+        <div class="day-header"><span>TUESDAY</span><input type="checkbox"></div>
+        <textarea></textarea>
+    </div>
+
+    <div class="day wed">
+        <div class="marker"></div>
+        <div class="day-header"><span>WEDNESDAY</span><input type="checkbox"></div>
+        <textarea></textarea>
+    </div>
+
+    <div class="day thu">
+        <div class="marker"></div>
+        <div class="day-header"><span>THURSDAY</span><input type="checkbox"></div>
+        <textarea></textarea>
+    </div>
+
+    <div class="day fri">
+        <div class="marker"></div>
+        <div class="day-header"><span>FRIDAY</span><input type="checkbox"></div>
+        <textarea></textarea>
+    </div>
+
+    <!-- Вихідні (розділені навпіл в одній колонці) -->
+    <div class="wknd-container">
+        <div class="sat">
+            <div class="day-header"><span>SATURDAY</span><input type="checkbox"></div>
+            <textarea></textarea>
+        </div>
+        <div class="sun">
+            <div class="day-header"><span>SUNDAY</span><input type="checkbox"></div>
+            <textarea></textarea>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
